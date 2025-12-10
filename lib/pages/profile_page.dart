@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'graph_page.dart';
+import 'test_page.dart';
 import 'profile/my_devices_page.dart';
 import 'profile/privacy_settings_page.dart';
 import 'profile/help_support_page.dart';
@@ -330,7 +331,11 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           // Edit
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const TestPage()),
+              );
+            },
             iconSize: 40,
             icon: const Icon(Icons.edit, color: Colors.black),
           ),

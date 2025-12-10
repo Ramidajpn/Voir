@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../home_page.dart';
 import '../graph_page.dart';
 import '../profile_page.dart';
+import '../test_page.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -101,7 +102,11 @@ class AboutPage extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const TestPage()),
+              );
+            },
             iconSize: 40,
             icon: const Icon(Icons.edit, color: Colors.black),
           ),

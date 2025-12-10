@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'graph_page.dart';
 import 'profile_page.dart';
+import 'test_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -198,7 +199,11 @@ class HomePage extends StatelessWidget {
 
           // Edit/Pen - inactive (plain icon)
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const TestPage()),
+              );
+            },
             iconSize: 40,
             icon: const Icon(Icons.edit, color: Colors.black),
           ),

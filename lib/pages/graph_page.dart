@@ -3,6 +3,7 @@ import 'dart:math' show pi;
 import 'package:fl_chart/fl_chart.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
+import 'test_page.dart';
 
 class GraphPage extends StatefulWidget {
   const GraphPage({super.key});
@@ -525,7 +526,11 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
           ),
           // Edit
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const TestPage()),
+              );
+            },
             iconSize: 40,
             icon: const Icon(Icons.edit, color: Colors.black),
           ),

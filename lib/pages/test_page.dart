@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'graph_page.dart';
 import 'profile_page.dart';
+import 'ishihara_test_page.dart';
 
 class TestPage extends StatelessWidget {
   const TestPage({super.key});
@@ -268,11 +269,9 @@ class TestPage extends StatelessWidget {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Navigate to next test step
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Starting Vision Test...'),
-                                    duration: Duration(seconds: 1),
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const IshiharaTestPage(),
                                   ),
                                 );
                               },

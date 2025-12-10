@@ -59,6 +59,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/ishihara/
 
   fonts:
     - family: Roboto

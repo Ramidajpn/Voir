@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'graph_page.dart';
 import 'profile_page.dart';
+import 'ocr_camera_page.dart';
 
 class IshiharaTestPage extends StatefulWidget {
   const IshiharaTestPage({super.key});
@@ -979,7 +980,11 @@ class _IshiharaTestPageState extends State<IshiharaTestPage> {
                 width: isTablet ? 240 : 180,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Navigate to next screen (medical scan)
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const OcrCameraPage(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

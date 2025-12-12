@@ -60,6 +60,7 @@ flutter:
   assets:
     - assets/
     - assets/ishihara/
+    - assets/avatar/
 
   fonts:
     - family: Roboto

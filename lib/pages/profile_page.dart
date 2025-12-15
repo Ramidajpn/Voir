@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'graph_page.dart';
 import 'test_page.dart';
+import 'calibration_page.dart';
 import 'profile/my_devices_page.dart';
 import 'profile/privacy_settings_page.dart';
 import 'profile/help_support_page.dart';
@@ -19,7 +20,9 @@ class _ProfilePageState extends State<ProfilePage> {
   late String _colorBlindType = 'Protanopia';
 
   void _editUserName(BuildContext context, bool isTablet) {
-    final TextEditingController controller = TextEditingController(text: _userName);
+    final TextEditingController controller = TextEditingController(
+      text: _userName,
+    );
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -35,10 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           content: TextField(
             controller: controller,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: isTablet ? 18 : 16,
-            ),
+            style: TextStyle(color: Colors.white, fontSize: isTablet ? 18 : 16),
             decoration: InputDecoration(
               hintText: 'Enter new name',
               hintStyle: TextStyle(color: Colors.white30),
@@ -131,7 +131,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 // Navigate to color vision training game
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Redirecting to Color Vision Training Game...'),
+                    content: Text(
+                      'Redirecting to Color Vision Training Game...',
+                    ),
                     duration: Duration(seconds: 1),
                   ),
                 );
@@ -173,19 +175,34 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _buildSettingMenuOption('Edit Profile', Icons.edit, isTablet, context),
+                _buildSettingMenuOption(
+                  'Edit Profile',
+                  Icons.edit,
+                  isTablet,
+                  context,
+                ),
                 Divider(
                   color: Colors.white10,
                   height: isTablet ? 12 : 8,
                   thickness: 0.5,
                 ),
-                _buildSettingMenuOption('Privacy Settings', Icons.privacy_tip, isTablet, context),
+                _buildSettingMenuOption(
+                  'Privacy Settings',
+                  Icons.privacy_tip,
+                  isTablet,
+                  context,
+                ),
                 Divider(
                   color: Colors.white10,
                   height: isTablet ? 12 : 8,
                   thickness: 0.5,
                 ),
-                _buildSettingMenuOption('Help & Support', Icons.help, isTablet, context),
+                _buildSettingMenuOption(
+                  'Help & Support',
+                  Icons.help,
+                  isTablet,
+                  context,
+                ),
                 Divider(
                   color: Colors.white10,
                   height: isTablet ? 12 : 8,
@@ -200,7 +217,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildSettingMenuOption(String title, IconData icon, bool isTablet, BuildContext context) {
+  Widget _buildSettingMenuOption(
+    String title,
+    IconData icon,
+    bool isTablet,
+    BuildContext context,
+  ) {
     return InkWell(
       onTap: () {
         Navigator.pop(context);
@@ -212,11 +234,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: Colors.white70,
-              size: isTablet ? 24 : 22,
-            ),
+            Icon(icon, color: Colors.white70, size: isTablet ? 24 : 22),
             SizedBox(width: isTablet ? 14 : 10),
             Text(
               title,
@@ -233,7 +251,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildStatsCard(String label, String value, Color valueColor, bool isTablet) {
+  Widget _buildStatsCard(
+    String label,
+    String value,
+    Color valueColor,
+    bool isTablet,
+  ) {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -267,7 +290,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildNavigationBar(BuildContext context, bool isTablet) {
     return Container(
       margin: EdgeInsets.all(isTablet ? 24 : 20),
-      padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12, horizontal: isTablet ? 24 : 16),
+      padding: EdgeInsets.symmetric(
+        vertical: isTablet ? 16 : 12,
+        horizontal: isTablet ? 24 : 16,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -303,30 +329,38 @@ class _ProfilePageState extends State<ProfilePage> {
             iconSize: 40,
             icon: const Icon(Icons.show_chart_outlined, color: Colors.black),
           ),
-          // Eye
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  blurRadius: 16,
-                  spreadRadius: 3,
-                  offset: const Offset(0, 6),
-                ),
-                BoxShadow(
-                  color: const Color.fromARGB(255, 243, 240, 240).withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.all(20),
-            child: Icon(
-              Icons.remove_red_eye,
-              color: Colors.black,
-              size: 56,
+          // Eye - Navigate to Calibration
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const CalibrationPage()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 16,
+                    spreadRadius: 3,
+                    offset: const Offset(0, 6),
+                  ),
+                  BoxShadow(
+                    color: const Color.fromARGB(
+                      255,
+                      243,
+                      240,
+                      240,
+                    ).withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(20),
+              child: Icon(Icons.remove_red_eye, color: Colors.black, size: 56),
             ),
           ),
           // Edit
@@ -432,7 +466,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: CircleAvatar(
                             radius: isTablet ? 80 : 65,
                             backgroundColor: Colors.grey.shade700,
-                            backgroundImage: const AssetImage('assets/john doe.png'),
+                            backgroundImage: const AssetImage(
+                              'assets/john doe.png',
+                            ),
                             onBackgroundImageError: (exception, stackTrace) {},
                           ),
                         ),
@@ -516,7 +552,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     vertical: isTablet ? 6 : 4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF638D94).withOpacity(0.2),
+                                    color: const Color(
+                                      0xFF638D94,
+                                    ).withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(
@@ -570,19 +608,34 @@ class _ProfilePageState extends State<ProfilePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              _buildStatsCard('Left Lens', '95%', Colors.green, isTablet),
+                              _buildStatsCard(
+                                'Left Lens',
+                                '95%',
+                                Colors.green,
+                                isTablet,
+                              ),
                               Container(
                                 width: 1,
                                 height: isTablet ? 50 : 40,
                                 color: Colors.white.withOpacity(0.1),
                               ),
-                              _buildStatsCard('Right Lens', '95%', Colors.green, isTablet),
+                              _buildStatsCard(
+                                'Right Lens',
+                                '95%',
+                                Colors.green,
+                                isTablet,
+                              ),
                               Container(
                                 width: 1,
                                 height: isTablet ? 50 : 40,
                                 color: Colors.white.withOpacity(0.1),
                               ),
-                              _buildStatsCard('Case', '100%', Colors.blue, isTablet),
+                              _buildStatsCard(
+                                'Case',
+                                '100%',
+                                Colors.blue,
+                                isTablet,
+                              ),
                             ],
                           ),
                           SizedBox(height: isTablet ? 20 : 16),
@@ -594,13 +647,23 @@ class _ProfilePageState extends State<ProfilePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              _buildStatsCard('Firmware', 'v2.1.0', const Color(0xFF638D94), isTablet),
+                              _buildStatsCard(
+                                'Firmware',
+                                'v2.1.0',
+                                const Color(0xFF638D94),
+                                isTablet,
+                              ),
                               Container(
                                 width: 1,
                                 height: isTablet ? 50 : 40,
                                 color: Colors.white.withOpacity(0.1),
                               ),
-                              _buildStatsCard('Last Sync', '2 min ago', Colors.blue, isTablet),
+                              _buildStatsCard(
+                                'Last Sync',
+                                '2 min ago',
+                                Colors.blue,
+                                isTablet,
+                              ),
                             ],
                           ),
                         ],
@@ -634,19 +697,31 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           SizedBox(height: isTablet ? 20 : 16),
-                          _buildSettingsRow('Edit Profile', Icons.edit, isTablet),
+                          _buildSettingsRow(
+                            'Edit Profile',
+                            Icons.edit,
+                            isTablet,
+                          ),
                           Divider(
                             color: Colors.white.withOpacity(0.1),
                             height: isTablet ? 20 : 16,
                             thickness: 0.5,
                           ),
-                          _buildSettingsRow('Privacy Settings', Icons.privacy_tip, isTablet),
+                          _buildSettingsRow(
+                            'Privacy Settings',
+                            Icons.privacy_tip,
+                            isTablet,
+                          ),
                           Divider(
                             color: Colors.white.withOpacity(0.1),
                             height: isTablet ? 20 : 16,
                             thickness: 0.5,
                           ),
-                          _buildSettingsRow('Help & Support', Icons.help, isTablet),
+                          _buildSettingsRow(
+                            'Help & Support',
+                            Icons.help,
+                            isTablet,
+                          ),
                           Divider(
                             color: Colors.white.withOpacity(0.1),
                             height: isTablet ? 20 : 16,
@@ -658,19 +733,31 @@ class _ProfilePageState extends State<ProfilePage> {
                             height: isTablet ? 20 : 16,
                             thickness: 0.5,
                           ),
-                          _buildSettingsRow('My Devices', Icons.devices, isTablet),
+                          _buildSettingsRow(
+                            'My Devices',
+                            Icons.devices,
+                            isTablet,
+                          ),
                           Divider(
                             color: Colors.white.withOpacity(0.1),
                             height: isTablet ? 20 : 16,
                             thickness: 0.5,
                           ),
-                          _buildSettingsRow('Download My Data', Icons.cloud_download, isTablet),
+                          _buildSettingsRow(
+                            'Download My Data',
+                            Icons.cloud_download,
+                            isTablet,
+                          ),
                           Divider(
                             color: Colors.white.withOpacity(0.1),
                             height: isTablet ? 20 : 16,
                             thickness: 0.5,
                           ),
-                          _buildSettingsRowDanger('Sign Out', Icons.logout, isTablet),
+                          _buildSettingsRowDanger(
+                            'Sign Out',
+                            Icons.logout,
+                            isTablet,
+                          ),
                         ],
                       ),
                     ),
@@ -723,11 +810,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Row(
             children: [
-              Icon(
-                icon,
-                color: Colors.white70,
-                size: isTablet ? 20 : 18,
-              ),
+              Icon(icon, color: Colors.white70, size: isTablet ? 20 : 18),
               SizedBox(width: isTablet ? 12 : 8),
               Text(
                 title,

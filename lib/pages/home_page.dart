@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'graph_page.dart';
 import 'profile_page.dart';
 import 'test_page.dart';
+import 'calibration_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -116,10 +117,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildNavigationBar(BuildContext context, bool isTablet, int activeIndex) {
+  Widget _buildNavigationBar(
+    BuildContext context,
+    bool isTablet,
+    int activeIndex,
+  ) {
     return Container(
       margin: EdgeInsets.all(isTablet ? 24 : 20),
-      padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12, horizontal: isTablet ? 24 : 16),
+      padding: EdgeInsets.symmetric(
+        vertical: isTablet ? 16 : 12,
+        horizontal: isTablet ? 24 : 16,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -170,30 +178,33 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.show_chart_outlined, color: Colors.black),
           ),
 
-          // Eye - Active (plain icon with white circle background)
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  blurRadius: 16,
-                  spreadRadius: 3,
-                  offset: const Offset(0, 6),
-                ),
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.all(20),
-            child: Icon(
-              Icons.remove_red_eye,
-              color: Colors.black,
-              size: 56,
+          // Eye - Navigate to Calibration
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const CalibrationPage()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 16,
+                    spreadRadius: 3,
+                    offset: const Offset(0, 6),
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(20),
+              child: Icon(Icons.remove_red_eye, color: Colors.black, size: 56),
             ),
           ),
 
@@ -456,7 +467,10 @@ class HomePage extends StatelessWidget {
               elevation: isTablet ? 6 : 3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
-                side: BorderSide(color: Colors.white, width: isTablet ? 2 : 1.5),
+                side: BorderSide(
+                  color: Colors.white,
+                  width: isTablet ? 2 : 1.5,
+                ),
               ),
               padding: EdgeInsets.symmetric(
                 horizontal: isTablet ? 60 : 40,
@@ -482,9 +496,7 @@ class HomePage extends StatelessWidget {
         Container(
           height: isTablet ? 200 : 150,
           width: isTablet ? 240 : 160,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(

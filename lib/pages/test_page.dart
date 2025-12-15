@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'graph_page.dart';
 import 'profile_page.dart';
-import 'ishihara_test_page.dart';
+import 'test/ishihara_test_page.dart';
+import 'calibration_page.dart';
 
 class TestPage extends StatelessWidget {
   const TestPage({super.key});
@@ -49,30 +50,37 @@ class TestPage extends StatelessWidget {
             iconSize: 40,
             icon: const Icon(Icons.show_chart_outlined, color: Colors.black),
           ),
-          // Eye
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  blurRadius: 16,
-                  spreadRadius: 3,
-                  offset: const Offset(0, 6),
-                ),
-                BoxShadow(
-                  color: Colors.white.withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.all(20),
-            child: const Icon(
-              Icons.remove_red_eye,
-              color: Colors.black,
-              size: 56,
+          // Eye - Navigate to Calibration
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const CalibrationPage()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 16,
+                    spreadRadius: 3,
+                    offset: const Offset(0, 6),
+                  ),
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(20),
+              child: const Icon(
+                Icons.remove_red_eye,
+                color: Colors.black,
+                size: 56,
+              ),
             ),
           ),
           // Edit - Active (with neumorphic effect)
@@ -139,9 +147,7 @@ class TestPage extends StatelessWidget {
             bottom: 0,
             child: ClipPath(
               clipper: WaveClipper(),
-              child: Container(
-                color: Colors.white,
-              ),
+              child: Container(color: Colors.white),
             ),
           ),
 
@@ -209,7 +215,12 @@ class TestPage extends StatelessWidget {
                                 TextSpan(
                                   text: 'Voir Vision Lab',
                                   style: TextStyle(
-                                    color: const Color.fromARGB(255, 10, 11, 11),
+                                    color: const Color.fromARGB(
+                                      255,
+                                      10,
+                                      11,
+                                      11,
+                                    ),
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
@@ -325,18 +336,8 @@ class WaveClipper extends CustomClipper<Path> {
     path.moveTo(0, 60);
 
     // Create smooth wave curve
-    path.quadraticBezierTo(
-      size.width * 0.25,
-      0,
-      size.width * 0.5,
-      30,
-    );
-    path.quadraticBezierTo(
-      size.width * 0.75,
-      60,
-      size.width,
-      20,
-    );
+    path.quadraticBezierTo(size.width * 0.25, 0, size.width * 0.5, 30);
+    path.quadraticBezierTo(size.width * 0.75, 60, size.width, 20);
 
     // Complete the rectangle
     path.lineTo(size.width, size.height);

@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'test_page.dart';
+import 'calibration_page.dart';
 
 class GraphPage extends StatefulWidget {
   const GraphPage({super.key});
@@ -55,7 +56,9 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                         CircleAvatar(
                           radius: isTablet ? 35 : 20,
                           backgroundColor: Colors.grey,
-                          backgroundImage: const AssetImage('assets/john doe.png'),
+                          backgroundImage: const AssetImage(
+                            'assets/john doe.png',
+                          ),
                           onBackgroundImageError: (exception, stackTrace) {
                             // ถ้ารูปไม่พบ จะใช้สีเทาแทน
                           },
@@ -200,7 +203,10 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                           animation: _temperatureController,
                           builder: (context, child) {
                             return CustomPaint(
-                              size: Size(isTablet ? 250 : 200, isTablet ? 125 : 100),
+                              size: Size(
+                                isTablet ? 250 : 200,
+                                isTablet ? 125 : 100,
+                              ),
                               painter: SemiCircularGaugePainter(
                                 value: _temperatureController.value * 0.35,
                                 temperature: 35,
@@ -216,7 +222,11 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                         children: [
                           _buildIndicator(Colors.green, 'Safe', isTablet),
                           SizedBox(width: isTablet ? 24 : 16),
-                          _buildIndicator(Colors.yellow[600]!, 'Careful', isTablet),
+                          _buildIndicator(
+                            Colors.yellow[600]!,
+                            'Careful',
+                            isTablet,
+                          ),
                           SizedBox(width: isTablet ? 24 : 16),
                           _buildIndicator(Colors.red[600]!, 'Danger', isTablet),
                         ],
@@ -299,7 +309,9 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                               horizontalInterval: 200,
                               getDrawingHorizontalLine: (value) {
                                 return FlLine(
-                                  color: const Color(0xFF638D94).withOpacity(0.1),
+                                  color: const Color(
+                                    0xFF638D94,
+                                  ).withOpacity(0.1),
                                   strokeWidth: 1,
                                 );
                               },
@@ -312,17 +324,21 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                                   reservedSize: 30,
                                   getTitlesWidget: (value, meta) {
                                     if (value == 0) {
-                                      return const Text('Last 8 hrs',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Color(0xFF638D94),
-                                          ));
+                                      return const Text(
+                                        'Last 8 hrs',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xFF638D94),
+                                        ),
+                                      );
                                     } else if (value == 6) {
-                                      return const Text('Today',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Color(0xFF638D94),
-                                          ));
+                                      return const Text(
+                                        'Today',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xFF638D94),
+                                        ),
+                                      );
                                     }
                                     return const Text('');
                                   },
@@ -355,9 +371,7 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                                 sideTitles: SideTitles(showTitles: false),
                               ),
                             ),
-                            borderData: FlBorderData(
-                              show: false,
-                            ),
+                            borderData: FlBorderData(show: false),
                             minX: 0,
                             maxX: 6,
                             minY: 0,
@@ -378,8 +392,9 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
                                 barWidth: 3,
                                 belowBarData: BarAreaData(
                                   show: true,
-                                  color:
-                                      const Color(0xFF638D94).withOpacity(0.2),
+                                  color: const Color(
+                                    0xFF638D94,
+                                  ).withOpacity(0.2),
                                   gradient: LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
@@ -426,10 +441,7 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
         Container(
           width: 12,
           height: 12,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: color,
-          ),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: color),
         ),
         SizedBox(width: 6),
         Text(
@@ -448,7 +460,10 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
   Widget _buildNavigationBar(BuildContext context, bool isTablet) {
     return Container(
       margin: EdgeInsets.all(isTablet ? 24 : 20),
-      padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12, horizontal: isTablet ? 24 : 16),
+      padding: EdgeInsets.symmetric(
+        vertical: isTablet ? 16 : 12,
+        horizontal: isTablet ? 24 : 16,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -498,30 +513,38 @@ class _GraphPageState extends State<GraphPage> with TickerProviderStateMixin {
               icon: const Icon(Icons.show_chart_outlined, color: Colors.black),
             ),
           ),
-          // Eye
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  blurRadius: 16,
-                  spreadRadius: 3,
-                  offset: const Offset(0, 6),
-                ),
-                BoxShadow(
-                  color: const Color.fromARGB(255, 243, 240, 240).withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.all(20),
-            child: Icon(
-              Icons.remove_red_eye,
-              color: Colors.black,
-              size: 56,
+          // Eye - Navigate to Calibration
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const CalibrationPage()),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 16,
+                    spreadRadius: 3,
+                    offset: const Offset(0, 6),
+                  ),
+                  BoxShadow(
+                    color: const Color.fromARGB(
+                      255,
+                      243,
+                      240,
+                      240,
+                    ).withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(20),
+              child: Icon(Icons.remove_red_eye, color: Colors.black, size: 56),
             ),
           ),
           // Edit
@@ -583,7 +606,7 @@ class SemiCircularGaugePainter extends CustomPainter {
     // Text
     final textPainter = TextPainter(
       text: TextSpan(
-        text: '${temperature}°C',
+        text: '$temperature°C',
         style: const TextStyle(
           color: Color(0xFF638D94),
           fontSize: 60,

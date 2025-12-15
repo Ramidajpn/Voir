@@ -17,7 +17,13 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
   bool _biometricLock = false;
   bool _shareAnonymousData = false;
 
-  Widget _buildToggleSetting(String title, String subtitle, bool value, Function(bool) onChanged, bool isTablet) {
+  Widget _buildToggleSetting(
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool) onChanged,
+    bool isTablet,
+  ) {
     return InkWell(
       onTap: () => onChanged(!value),
       child: Container(
@@ -25,10 +31,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.1),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +65,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
             Switch(
               value: value,
               onChanged: onChanged,
-              activeColor: const Color(0xFF638D94),
+              activeThumbColor: const Color(0xFF638D94),
               inactiveThumbColor: Colors.white30,
             ),
           ],
@@ -71,7 +74,12 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
     );
   }
 
-  Widget _buildActionButton(String title, IconData icon, VoidCallback onTap, bool isTablet) {
+  Widget _buildActionButton(
+    String title,
+    IconData icon,
+    VoidCallback onTap,
+    bool isTablet,
+  ) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -80,18 +88,11 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.1),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: Colors.white70,
-              size: isTablet ? 22 : 20,
-            ),
+            Icon(icon, color: Colors.white70, size: isTablet ? 22 : 20),
             SizedBox(width: isTablet ? 12 : 8),
             Text(
               title,
@@ -117,7 +118,10 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
   Widget _buildNavigationBar(BuildContext context, bool isTablet) {
     return Container(
       margin: EdgeInsets.all(isTablet ? 24 : 20),
-      padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12, horizontal: isTablet ? 24 : 16),
+      padding: EdgeInsets.symmetric(
+        vertical: isTablet ? 16 : 12,
+        horizontal: isTablet ? 24 : 16,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -347,7 +351,9 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
 
                 _buildActionButton('Export My Data', Icons.download, () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Downloading medical data as PDF...')),
+                    const SnackBar(
+                      content: Text('Downloading medical data as PDF...'),
+                    ),
                   );
                 }, isTablet),
 
@@ -375,21 +381,32 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
                         ),
                         content: Text(
                           'This action cannot be undone. All your data will be permanently deleted.',
-                          style: TextStyle(color: Colors.white70, fontSize: isTablet ? 14 : 12),
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: isTablet ? 14 : 12,
+                          ),
                         ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: const Text('Cancel', style: TextStyle(color: Colors.white60)),
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(color: Colors.white60),
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Account deletion initiated')),
+                                const SnackBar(
+                                  content: Text('Account deletion initiated'),
+                                ),
                               );
                             },
-                            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+                            child: const Text(
+                              'Delete',
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ),
                         ],
                       );

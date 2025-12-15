@@ -14,10 +14,7 @@ class HelpSupportPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.1),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +70,7 @@ class HelpSupportPage extends StatelessWidget {
                   ),
               ],
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -82,7 +79,10 @@ class HelpSupportPage extends StatelessWidget {
   Widget _buildNavigationBar(BuildContext context, bool isTablet) {
     return Container(
       margin: EdgeInsets.all(isTablet ? 24 : 20),
-      padding: EdgeInsets.symmetric(vertical: isTablet ? 16 : 12, horizontal: isTablet ? 24 : 16),
+      padding: EdgeInsets.symmetric(
+        vertical: isTablet ? 16 : 12,
+        horizontal: isTablet ? 24 : 16,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -241,52 +241,36 @@ class HelpSupportPage extends StatelessWidget {
 
                 SizedBox(height: isTablet ? 40 : 32),
 
-                _buildHelpCategory(
-                  'Tutorials',
-                  [
-                    'How to Wear & Remove',
-                    'AI Modes Guide',
-                    'Getting Started',
-                  ],
-                  isTablet,
-                ),
+                _buildHelpCategory('Tutorials', [
+                  'How to Wear & Remove',
+                  'AI Modes Guide',
+                  'Getting Started',
+                ], isTablet),
 
                 SizedBox(height: isTablet ? 20 : 16),
 
-                _buildHelpCategory(
-                  'Troubleshooting',
-                  [
-                    'Connection Issues',
-                    'Color Correction Fix',
-                    'Battery Problems',
-                    'Device Not Responding',
-                  ],
-                  isTablet,
-                ),
+                _buildHelpCategory('Troubleshooting', [
+                  'Connection Issues',
+                  'Color Correction Fix',
+                  'Battery Problems',
+                  'Device Not Responding',
+                ], isTablet),
 
                 SizedBox(height: isTablet ? 20 : 16),
 
-                _buildHelpCategory(
-                  'Support',
-                  [
-                    'Live Chat Support',
-                    'Email Support',
-                    'Schedule Video Call',
-                  ],
-                  isTablet,
-                ),
+                _buildHelpCategory('Support', [
+                  'Live Chat Support',
+                  'Email Support',
+                  'Schedule Video Call',
+                ], isTablet),
 
                 SizedBox(height: isTablet ? 20 : 16),
 
-                _buildHelpCategory(
-                  'Emergency',
-                  [
-                    'Emergency Guide',
-                    'Report Hardware Issue',
-                    'Medical Emergency',
-                  ],
-                  isTablet,
-                ),
+                _buildHelpCategory('Emergency', [
+                  'Emergency Guide',
+                  'Report Hardware Issue',
+                  'Medical Emergency',
+                ], isTablet),
 
                 SizedBox(height: isTablet ? 100 : 80),
               ],
